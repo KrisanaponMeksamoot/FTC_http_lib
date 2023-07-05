@@ -32,4 +32,10 @@ public class HttpRequest {
     public Map<String, String> getAttributes() {
         return attributes;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{method:%s, version:%s, uri:%s, attribute:%s}", method, version, uri.toString(),
+                attributes.toString());
+    }
 }

@@ -25,8 +25,11 @@ public class WebsocketHandler {
         HttpRequest req = con.getRequest();
         HttpResponse res = con.getResponse();
         assert isWebsocket(req);
-        res.putAttribute("Sec-Websocket-Accept", WSUtils.keyAccept(req.getAttributes().get("Sec-Websocket-Key")));
-        version = Integer.valueOf(req.getAttributes().get("Sec-Websocket-Version"));
+        res.putAttribute("Sec-WebSocket-Accept", WSUtils.keyAccept(req.getAttributes().get("Sec-WebSocket-Key")));
+        version = Integer.valueOf(req.getAttributes().get("Sec-WebSocket-Version"));
+        res.setStatus("101 Switching Protocols");
+        res.putAttribute("Connection", "Upgrade");
+        res.putAttribute("Upgrade", "websocket");
         con.sendHeader();
     }
 
@@ -37,7 +40,7 @@ public class WebsocketHandler {
             return false;
         if (!req.getAttributes().get("Upgrade").equals("websocket"))
             return false;
-        if (!req.getAttributes().containsKey("Sec-Websocket-Key"))
+        if (!req.getAttributes().containsKey("Sec-WebSocket-Key"))
             return false;
         return true;
     }
@@ -86,5 +89,9 @@ public class WebsocketHandler {
         dis.readFully(packet.data);
         WSUtils.mask(packet.data, packet.maskKey);
         return packet;
+    }
+
+    public void close() throws IOException {
+        con.close();
     }
 }

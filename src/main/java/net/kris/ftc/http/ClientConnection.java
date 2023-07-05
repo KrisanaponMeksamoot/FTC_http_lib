@@ -37,7 +37,7 @@ public class ClientConnection {
         String line;
         String host = "0.0.0.0";
         HashMap<String, String> attributes = new HashMap<>();
-        while ((line = reader.readLine()).isEmpty()) {
+        while (!(line = reader.readLine()).isEmpty()) {
             int sep = line.indexOf(": ");
             String key = line.substring(0, sep);
             String value = line.substring(sep + 2);
