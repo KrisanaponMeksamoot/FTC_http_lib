@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "%java_home%/lib/src.zip",
+        "src\\test\\java",
+        "src\\main\\java"
+    ]
+}
