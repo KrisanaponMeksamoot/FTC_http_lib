@@ -25,7 +25,7 @@ public class Test {
                         ws.send(new WSFrame(true, WSUtils.OP_TEXT, "Hello, World!".getBytes()));
                         while (true) {
                             WSFrame packet = ws.receive();
-                            System.out.printf("%d: %s", packet.opcode, new String(packet.data));
+                            System.out.printf("%d: %s\r\n", packet.opcode, new String(packet.data));
                             if (packet.opcode == WSUtils.OP_CLOSE) {
                                 ws.send(new WSFrame(true, WSUtils.OP_CLOSE, new byte[] { 0x03, -24 }));
                                 ws.close();
