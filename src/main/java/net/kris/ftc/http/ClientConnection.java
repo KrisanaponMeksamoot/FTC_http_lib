@@ -20,6 +20,10 @@ public class ClientConnection {
         this.s = s;
     }
 
+    public Socket getSocket() {
+        return s;
+    }
+
     public InputStream getInputStream() throws IOException {
         return s.getInputStream();
     }

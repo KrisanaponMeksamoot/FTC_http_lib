@@ -21,6 +21,10 @@ public class WebsocketHandler {
         this.dos = new DataOutputStream(con.getOutputStream());
     }
 
+    public ClientConnection getConnection() {
+        return con;
+    }
+
     public void sendHeader() throws IOException {
         HttpRequest req = con.getRequest();
         HttpResponse res = con.getResponse();
